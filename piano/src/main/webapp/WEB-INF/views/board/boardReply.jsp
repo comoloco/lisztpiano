@@ -32,13 +32,19 @@
 	function insertBoardReply(){
 
 		var boardSubject = $("#board_subject").val();
+		var boardWriter = $("#board_writer").val();
 		var boardContent = $("#board_content").val();
-			
+		if (boardWriter == ""){			
+			alert("로그인을 해주세요.");
+			$("#board_writer").focus();
+			return;
+		}
 		if (boardSubject == ""){			
 			alert("제목을 입력해주세요.");
 			$("#board_subject").focus();
 			return;
 		}
+		
 		
 		if (boardContent == ""){			
 			alert("내용을 입력해주세요.");
@@ -106,7 +112,7 @@
 						</tr>
 						<tr>
 							<th>작성자<span class="t_red">*</span></th>
-							<td><input id="board_writer" name="board_writer" readonly value="${loginInfo.get('uid')}" class="tbox01"/></td>
+							<td><input id="board_writer" name="board_writer" readonly value="${member.uid}" class="tbox01"/></td>
 						</tr>
 						<tr>
 							<th>내용<span class="t_red">*</span></th>

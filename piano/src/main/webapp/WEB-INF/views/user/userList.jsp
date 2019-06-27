@@ -3,36 +3,41 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
-.table
-{
-	display:table;
-	border-collapse:separate;
-	border-spacing:2px;
+.divTable{
+	display: table;
+	width: 50%;
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
 }
-.thead
-{
-	display:table-header-group;
-	color:white;
-	font-weight:bold;
-	background-color:grey;
+.divTableRow {
+	display: table-row;
 }
-.tbody
-{
-	display:table-row-group;
+.divTableRow1 {
+	display: table-row;
+	background-color:#808080;
 }
-.tr
-{
-	display:table-row;
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
 }
-.td
-{
-	display:table-cell;
-	border:1px solid black;
-	padding:1px;
+.divTableCell, .divTableHead {
+	border: 1px solid #999999;
+	display: table-cell;
+	padding: 3px 10px;
 }
-.tr.editing .td INPUT
-{
-	width:100px;
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+	font-weight: bold;
+}
+.divTableFoot {
+	background-color: #EEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+.divTableBody {
+	display: table-row-group;
 }
 </style>
 <article>
@@ -40,35 +45,30 @@
 	<jsp:include page="../main/header.jsp" flush="true"/>
 	<div class="container" id="container">
 		<h2 style="text-align:center;">유저정보</h2>
-		<div class="table-responsive" style="margin-bottom:10%;">		
-			<div class="table ">
-				<div class="thead">
-					<div class="tr">
-						<div class="td">원생 ID</div>
-						<div class="td">원생이름</div>
-						<div class="td">EMAIL</div>
-						<div class="td">과목</div>
-						<div class="td">가입일</div>
-						<div class="td">학원 등록일</div>
-						<div class="td">진행상황</div>
-						<div class="td">수정</div>
-					</div>
+		<div class="" style="margin-bottom:10%;">		
+			<div class="divTable" style="">
+			<div class="divTableBody">
+				<div class="divTableRow1">
+						<div class="divTableCell">원생 ID</div>
+						<div class="divTableCell">원생이름</div>
+						<div class="divTableCell">EMAIL</div>
+						<div class="divTableCell">과목</div>
+						<div class="divTableCell">가입일</div>
+						<div class="divTableCell">학원 등록일</div>
+						<div class="divTableCell">진행상황</div>
+						<div class="divTableCell">수정</div>
 				</div>
-				<div class="tbody">
+				
 					<c:choose>
-						<c:when test="${empty userList }">
-							<tr>
-								<td colspan="5" align="center">데이터가 없습니다.</td>
-							</tr>
-						</c:when>
 						<c:when test="${!empty userList}">
 							<c:forEach var="list" items="${userList}">
-								<div class="tr">
-								<form id="myForm" name="myForm" method="post" action="../member/updateUser">
-									<div class="td"><c:out value="${list.uid}" /></div>
-									<div class="td"><c:out value="${list.name}" /></div>
-									<div class="td"><c:out value="${list.email}" /></div>
-									<div class="td">
+							
+								
+								<form class="divTableRow" id="myForm" name="myForm" method="post" action="../member/updateUser">
+									<div class="divTableCell"><c:out value="${list.uid}" /></div>
+									<div class="divTableCell"><c:out value="${list.name}" /></div>
+									<div class="divTableCell"><c:out value="${list.email}" /></div>
+									<div class="divTableCell">
 									<select id="grade" name="grade">
 									<option value="1" <c:if test="${list.grade eq 1}">selected</c:if> >입시반</option>
 									<option value="2" <c:if test="${list.grade eq 2}">selected</c:if> >취미반</option>
@@ -77,11 +77,11 @@
 									<option value="5" <c:if test="${list.grade eq 5}">selected</c:if>>주니어반</option>
 									</select>
 									</div>
-									<div class="td"><c:out value="${list.reg_dt}" /></div>
-									<div class="td">
+									<div class="divTableCell"><c:out value="${list.reg_dt}" /></div>
+									<div class="divTableCell">
 									${list.start_day}
 									</div>
-									<div class="td">
+									<div class="divTableCell">
 									<select id="ing_status" name="ing_status">
 									<option value="0" <c:if test="${list.ing_status eq 0}">selected</c:if> >0</option>
 									<option value="1" <c:if test="${list.ing_status eq 1}">selected</c:if> >1</option>
@@ -97,19 +97,21 @@
 									</select>
 									
 									</div>
-									<div class="td">
+									<div class="divTableCell">
 									<input type="hidden" id="uid" name="uid" value="${list.uid }">
 									<button type="submit" onclick="change()">수정</button>
 									</div>
 									</form>
-								</div>
+								
 							</c:forEach>
 						</c:when>
 					</c:choose>
+				
 				</div>
 		</div>
 	</div>
 	<jsp:include page="../main/footer.jsp" flush="true"/>
+	</div>
 	</div>
 </article>
 <script>

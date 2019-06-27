@@ -8,11 +8,11 @@
 <title>게시판 상세</title>
 <%    
     String boardSeq = request.getParameter("boardSeq");      
-request.getAttribute("board_writer");
-%>
- 
-<c:set var="boardSeq" value="<%=boardSeq%>"/> <!-- 게시글 번호 -->
 
+%>
+
+<c:set var="boardSeq" value="<%=boardSeq%>"/> <!-- 게시글 번호 -->
+<c:set var="member" value="${member.uid}"/>
 <!-- 공통 CSS -->
 <link rel="stylesheet" type="text/css" href="/resources/css/common/common.css"/>
  
@@ -98,7 +98,8 @@ request.getAttribute("board_writer");
             var updDate         = obj.upd_date;
             var files            = obj.files;        
             var filesLen        = files.length;
-                        
+            var member = '<c:out value="${member}"/>'; 
+            
             str += "<tr>";
             str += "<th>제목</th>";
             str += "<td>"+ boardSubject +"</td>";
@@ -141,7 +142,14 @@ request.getAttribute("board_writer");
                     str += "</tr>";
                 }    
             }            
-            
+            if(boardWriter == member.trim() || member.trim() == 'admin'){
+                str += "<tr>";
+                str += "<td colspan='2'>" +"<button type='button' class='btn black mr5' onclick='javascript:goBoardUpdate();'>수정하기</button>";
+                str += "</td><td colspan='2'>";
+                str += "<button type='button' class='btn black' onclick='javascript:deleteBoard();''>삭제하기</button>";
+                str += "</td>";
+                str += "</tr>";
+                }
         } else {
             
             alert("등록된 글이 존재하지 않습니다.");
@@ -217,13 +225,15 @@ request.getAttribute("board_writer");
                 <input type="hidden" id="search_type"    name="search_type"     value="S"/> <!-- 조회 타입 - 상세(S)/수정(U) -->
             </form>
             <div class="btn_right mt15">
-            <a>${board_writer}</a>
+            
                 <button type="button" class="btn black mr5" onclick="javascript:goBoardList();">목록으로</button>
-                <c:if test="${loginInfo.size() > 0 }">
+                <%-- <c:if test="${loginInfo.size() > 0 }">
                 <button type="button" class="btn black mr5" onclick="javascript:goBoardUpdate();">수정하기</button>
                 <button type="button" class="btn black" onclick="javascript:deleteBoard();">삭제하기</button>
-           		</c:if>
+           		</c:if> --%>
+           		 <c:if test="${member != null}">
            		<button type="button" class="btn black mr5" onclick="javascript:goBoardReply();">답글쓰기</button>
+           		</c:if>
             </div>
         </div>
     </div>

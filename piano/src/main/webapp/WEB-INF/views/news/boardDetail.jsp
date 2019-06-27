@@ -11,10 +11,11 @@
 %>
  
 <c:set var="boardSeq" value="<%=boardSeq%>"/> <!-- 게시글 번호 -->
+<c:set var="member" value="${member.uid}"/>
 
 <!-- 공통 CSS -->
 <link rel="stylesheet" type="text/css" href="/resources/css/common/common.css"/>
- 
+
 <!-- 공통 JavaScript -->
 <script type="text/javascript" src="/resources/js/common/jquery.js"></script>
 <script type="text/javascript">
@@ -77,7 +78,7 @@
     
     /** 게시판 - 상세 조회  콜백 함수 */
     function getBoardDetailCallback(obj){
-        
+    	
         var str = "";
         
         if(obj != null){                                
@@ -97,7 +98,9 @@
             var updDate         = obj.upd_date;
             var files            = obj.files;        
             var filesLen        = files.length;
-                        
+
+            var member = '<c:out value="${member}"/>';
+            
             str += "<tr>";
             str += "<th>제목</th>";
             str += "<td>"+ boardSubject +"</td>";
@@ -139,7 +142,18 @@
                     str += "<td colspan='3'><img style='width:300px;height:300px' src=/resources/img/"+fileNameKey+"><a href='/news/fileDownload?fileNameKey="+encodeURI(fileNameKey)+"&fileName="+encodeURI(fileName)+"&filePath="+encodeURI(filePath)+"'>" + fileName + "</a></td>";
                     str += "</tr>";
                 }    
-            }            
+            }   
+            
+            
+            if(boardWriter == member.trim() || member.trim() == 'admin'){
+            str += "<tr>";
+            str += "<td colspan='2'>" +"<button type='button' class='btn black mr5' onclick='javascript:goBoardUpdate();'>수정하기</button>";
+            str += "</td><td colspan='2'>";
+            str += "<button type='button' class='btn black' onclick='javascript:deleteBoard();''>삭제하기</button>";
+            str += "</td>";
+            str += "</tr>";
+            }
+            
             
         } else {
             
@@ -216,14 +230,12 @@
                 <input type="hidden" id="search_type"    name="search_type"     value="S"/> <!-- 조회 타입 - 상세(S)/수정(U) -->
             </form>
             <div class="btn_right mt15">
-            <a>${dto}</a>
+            
                 <button type="button" class="btn black mr5" onclick="javascript:goBoardList();">목록으로</button>
-                <c:if test="${member.uid eq dto}">
-                <button type="button" class="btn black mr5" onclick="javascript:goBoardUpdate();">수정하기</button>
-                <button type="button" class="btn black" onclick="javascript:deleteBoard();">삭제하기</button>
-                </c:if>
+                 <c:if test="${member != null}">
            		<button type="button" class="btn black mr5" onclick="javascript:goBoardReply();">답글쓰기</button>
-            </div>
+            	</c:if> 
+            	</div>
         </div>
     </div>
     <jsp:include page="../main/footer.jsp" flush="true"/>
