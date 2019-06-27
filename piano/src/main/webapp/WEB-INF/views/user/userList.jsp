@@ -1,121 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- <script>
-	$(document).on('click', '#btnSearch', function(e) {
-		e.preventDefault();
-		var url = "${getBoardListURL}";
-		url = url + "?searchType=" + $('#searchType').val();
-		url = url + "&keyword=" + $('#keyword').val();
-		console.log(url);
-		location.href = url;
-	});
-	function fn_prev(page, range, rangeSize, searchType, keyword) {
-		var page = ((range - 2) * rangeSize) + 1;
-		var range = range - 1;
-		var url = "${globalCtx}/user/getUserList";
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-		url = url + "&searchType=" + searchType;
-		url = url + "&keyword=" + keyword;
-		location.href = url;
-	}
-	function fn_pagination(page, range, rangeSize, searchType, keyword) {
-		var url = "${getUserListURL}";
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-		url = url + "&searchType=" + searchType;
-		url = url + "&keyword=" + keyword;
-		console.log(url);
-		location.href = url;
-	}
-	function fn_next(page, range, rangeSize, searchType, keyword) {
-		var page = parseInt((range * rangeSize)) + 1;
-		var range = parseInt(range) + 1;
-		var url = "${globalCtx}/user/getUserList";
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-		url = url + "&searchType=" + searchType;
-		url = url + "&keyword=" + keyword;
-		location.href = url;
-	}
-</script> -->
+
 <style>
-table { 
-	width: 750px; 
-	border-collapse: collapse; 
-	margin:50px auto;
-	}
-
-/* Zebra striping */
-tr:nth-of-type(odd) { 
-	background: #eee; 
-	}
-
-th { 
-	background: #3498db; 
-	color: white; 
-	font-weight: bold; 
-	}
-
-td, th { 
-	padding: 10px; 
-	border: 1px solid #ccc; 
-	text-align: left; 
-	font-size: 18px;
-	}
-
-/* 
-Max width before this PARTICULAR table gets nasty
-This query will take effect for any screen smaller than 760px
-and also iPads specifically.
-*/
-@media 
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
-
-	table { 
-	  	width: 100%; 
-	}
-
-	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr { 
-		display: block; 
-	}
-	
-	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-	
-	tr { border: 1px solid #ccc; }
-	
-	td { 
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 50%; 
-	}
-
-	td:before { 
-		/* Now like a table header */
-		position: absolute;
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-		/* Label the data */
-		content: attr(data-column);
-
-		color: #000;
-		font-weight: bold;
-	}
-
+.table
+{
+	display:table;
+	border-collapse:separate;
+	border-spacing:2px;
+}
+.thead
+{
+	display:table-header-group;
+	color:white;
+	font-weight:bold;
+	background-color:grey;
+}
+.tbody
+{
+	display:table-row-group;
+}
+.tr
+{
+	display:table-row;
+}
+.td
+{
+	display:table-cell;
+	border:1px solid black;
+	padding:1px;
+}
+.tr.editing .td INPUT
+{
+	width:100px;
 }
 </style>
 <article>
@@ -124,26 +41,20 @@ only screen and (max-width: 760px),
 	<div class="container" id="container">
 		<h2 style="text-align:center;">유저정보</h2>
 		<div class="table-responsive" style="margin-bottom:10%;">		
-			<table class="table table-striped table-sm">
-				<colgroup>
-					<col style="width: auto;" />
-					<col style="width: 15%;" />
-					<col style="width: 25%;" />
-					<col style="width: 15%;" />
-					<col style="width: 15%;" />
-					<col style="width: 15%;" />
-				</colgroup>
-				<thead>
-					<tr>
-						<th>원생 ID</th>
-						<th>원생이름</th>
-						<th>EMAIL</th>
-						<th>과목</th>
-						<th>가입일</th>
-						<th>학원 등록일</th>
-					</tr>
-				</thead>
-				<tbody>
+			<div class="table ">
+				<div class="thead">
+					<div class="tr">
+						<div class="td">원생 ID</div>
+						<div class="td">원생이름</div>
+						<div class="td">EMAIL</div>
+						<div class="td">과목</div>
+						<div class="td">가입일</div>
+						<div class="td">학원 등록일</div>
+						<div class="td">진행상황</div>
+						<div class="td">수정</div>
+					</div>
+				</div>
+				<div class="tbody">
 					<c:choose>
 						<c:when test="${empty userList }">
 							<tr>
@@ -152,74 +63,57 @@ only screen and (max-width: 760px),
 						</c:when>
 						<c:when test="${!empty userList}">
 							<c:forEach var="list" items="${userList}">
-								<tr>
-									<td><c:out value="${list.uid}" /></td>
-									<td><c:out value="${list.name}" /></td>
-									<td><c:out value="${list.email}" /></td>
-									<td>
-									<c:if test="${list.grade == 1}">입시반</c:if>
-									<c:if test="${list.grade == 2}">취미반</c:if>
-									<c:if test="${list.grade == 3}">음악치료반</c:if>
-									<c:if test="${list.grade == 4}">전문반</c:if>
-									<c:if test="${list.grade == 5}">주니어반</c:if>
-									</td>
-									<td><c:out value="${list.reg_dt}" /></td>
-									<td>
+								<div class="tr">
+								<form id="myForm" name="myForm" method="post" action="../member/updateUser">
+									<div class="td"><c:out value="${list.uid}" /></div>
+									<div class="td"><c:out value="${list.name}" /></div>
+									<div class="td"><c:out value="${list.email}" /></div>
+									<div class="td">
+									<select id="grade" name="grade">
+									<option value="1" <c:if test="${list.grade eq 1}">selected</c:if> >입시반</option>
+									<option value="2" <c:if test="${list.grade eq 2}">selected</c:if> >취미반</option>
+									<option value="3" <c:if test="${list.grade eq 3}">selected</c:if>>음악치료반</option>
+									<option value="4" <c:if test="${list.grade eq 4}">selected</c:if>>전문반</option>
+									<option value="5" <c:if test="${list.grade eq 5}">selected</c:if>>주니어반</option>
+									</select>
+									</div>
+									<div class="td"><c:out value="${list.reg_dt}" /></div>
+									<div class="td">
 									${list.start_day}
-									</td>
-								</tr>
+									</div>
+									<div class="td">
+									<select id="ing_status" name="ing_status">
+									<option value="0" <c:if test="${list.ing_status eq 0}">selected</c:if> >0</option>
+									<option value="1" <c:if test="${list.ing_status eq 1}">selected</c:if> >1</option>
+									<option value="2" <c:if test="${list.ing_status eq 2}">selected</c:if>>2</option>
+									<option value="3" <c:if test="${list.ing_status eq 3}">selected</c:if>>3</option>
+									<option value="4" <c:if test="${list.ing_status eq 4}">selected</c:if>>4</option>
+									<option value="5" <c:if test="${list.ing_status eq 5}">selected</c:if>>5</option>
+									<option value="6" <c:if test="${list.ing_status eq 6}">selected</c:if>>6</option>
+									<option value="7" <c:if test="${list.ing_status eq 7}">selected</c:if>>7</option>
+									<option value="8" <c:if test="${list.ing_status eq 8}">selected</c:if>>8</option>
+									<option value="9" <c:if test="${list.ing_status eq 9}">selected</c:if>>9</option>
+									<option value="10" <c:if test="${list.ing_status eq 10}">selected</c:if>>10</option>
+									</select>
+									
+									</div>
+									<div class="td">
+									<input type="hidden" id="uid" name="uid" value="${list.uid }">
+									<button type="submit" onclick="change()">수정</button>
+									</div>
+									</form>
+								</div>
 							</c:forEach>
 						</c:when>
 					</c:choose>
-				</tbody>
-			</table>
+				</div>
 		</div>
-		<%-- <!-- pagination{s} -->
-		<div id="paginationBox">
-			<ul class="pagination">
-				<c:if test="${pagination.prev}">
-					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.searchType}', '${pagination.keyword}')">Previous</a></li>
-				</c:if>
-				<c:forEach begin="${pagination.startPage}"
-					end="${pagination.endPage}" var="idx">
-					<li
-						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> "><a
-						class="page-link" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.searchType}', '${pagination.keyword}' )">
-							${idx} </a></li>
-				</c:forEach>
-				<c:if test="${pagination.next}">
-					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.searchType}', '${pagination.keyword}')">Next</a></li>
-				</c:if>
-			</ul>
-		</div>
-		<!-- pagination{e} -->
-		<!-- search{s} -->
-		<div class="form-group row justify-content-center">
-			<div style="padding-right: 10px">
-				<select class="form-control form-control-sm" name="searchType"
-					id="searchType">
-					<option value="title"
-						<c:if test="${pagination.searchType eq 'title'}">selected</c:if>>제목</option>
-					<option value="content"
-						<c:if test="${pagination.searchType eq 'content'}">selected</c:if>>본문</option>
-					<option value="reg_id"
-						<c:if test="${pagination.searchType eq 'reg_id'}">selected</c:if>>작성자</option>
-				</select>
-			</div>
-			<div style="padding-right: 10px">
-				<input type="text" class="form-control form-control-sm"
-					name="keyword" id="keyword" value="${pagination.keyword}">
-			</div>
-			<div>
-				<button class="btn btn-sm btn-primary" name="btnSearch"
-					id="btnSearch">검색</button>
-			</div>
-		</div>
-		<!-- search{e} --> --%>
 	</div>
 	<jsp:include page="../main/footer.jsp" flush="true"/>
 	</div>
 </article>
+<script>
+function change(){
+	alert("수정되었습니다.");
+}
+</script>

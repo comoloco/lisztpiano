@@ -74,7 +74,7 @@ ul li:last-child { border-radius:0 5px 5px 5px; }
       <a href="curriculum"><li class="white c"><P style="color:black;padding-top:150px">커</P><P style="color:black;">리</P><P style="color:black;">큘</P><P style="color:black;">럼</P></li></a>
  <a href="admission"> <li class="white b"><P style="color:black;padding-top:150px">수</P><P style="color:black;">강</P><P style="color:black;">신</P><P style="color:black;">청</P></li></a>
   <li class="black as"></li>
-  <a href="#" onclick="alert('준비중입니다.')"><li class="white a"><P style="color:black;padding-top:150px">새</P><!-- <P style="color:black;">&nbsp;</P> --><P style="color:black;">소</P><P style="color:black;">식</P></li></a>
+  <a href="news/boardList"><li class="white a"><P style="color:black;padding-top:150px">새</P><!-- <P style="color:black;">&nbsp;</P> --><P style="color:black;">소</P><P style="color:black;">식</P></li></a>
   <li class="black gs"></li>
   <a href="councel"><li class="white g"><P style="color:black;padding-top:150px">문</P><P style="color:black;">의</P><P style="color:black;">상</P><P style="color:black;">담</P></li></a>
   <li class="black fs"></li>

@@ -7,7 +7,7 @@
 		resultType="com.piano.liszt.user.model.UserVO"> SELECT UID , NAME , PWD , EMAIL , GRADE , REG_DT, START_DAY FROM
 		TBL_USER WHERE UID = #{uid} </select>
 	<select id="getUserList"
-		resultType="com.piano.liszt.user.model.UserVO"> SELECT UID , NAME , PWD , EMAIL , GRADE , REG_DT, START_DAY FROM
+		resultType="com.piano.liszt.user.model.UserVO"> SELECT UID , NAME , PWD , EMAIL , GRADE , REG_DT, START_DAY, ING_STATUS FROM
 		TBL_USER </select>
 	<insert id="insertUser"
 		parameterType="com.piano.liszt.user.model.UserVO"> INSERT INTO TBL_USER (UID, NAME, PWD, EMAIL, REG_DT)

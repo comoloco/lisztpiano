@@ -11,7 +11,7 @@
 
 	<div id="wrap">
 		<div id="container">
-		<img style="margin-left:35%;margin-top:3%"src="/resources/img/table.jpg">
+		<img style="display:block;margin-left:auto;margin-right:auto;margin-top:3%;margin-bottom:50px;width:45%;height:75%;" src="/resources/img/curi.jpg">
 		
 		</div>
 		<jsp:include page="../main/footer.jsp" flush="true" />

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -90,4 +91,21 @@ public class UserController {
 		return mav;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/idCheck",method=RequestMethod.POST)
+	public int PostIdCheck(HttpServletRequest req) throws Exception{
+		
+		String userId=req.getParameter("uid");
+		UserVO idCheck =userService.getUserInfo(userId);
+		int result =0;
+		if(idCheck != null) {
+			result=1;
+		}
+		return result;
+	}
+	@RequestMapping(value = "/findIDPW")
+	public String findidpwd(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		return "login/findIDPW";
+	}
 }

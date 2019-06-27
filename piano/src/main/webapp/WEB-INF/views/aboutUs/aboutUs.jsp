@@ -9,7 +9,7 @@
 <body>
 <div id="wrap">
 <jsp:include page="../main/header.jsp" flush="true"/>
-<div id="container"><img src="/resources/img/리스트피아노로고.jpg"></div>
+<div id="container"><img src="/resources/img/학원소개_1.jpg" style="display:block;margin-left:auto;margin-right:auto;margin-top:3%;width:45%;height:75%" ></div>
 <jsp:include page="../main/footer.jsp" flush="true"/>	
 </div>
 </body>

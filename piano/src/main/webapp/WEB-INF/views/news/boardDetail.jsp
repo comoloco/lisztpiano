@@ -216,8 +216,9 @@
                 <input type="hidden" id="search_type"    name="search_type"     value="S"/> <!-- 조회 타입 - 상세(S)/수정(U) -->
             </form>
             <div class="btn_right mt15">
+            <a>${dto}</a>
                 <button type="button" class="btn black mr5" onclick="javascript:goBoardList();">목록으로</button>
-                <c:if test="${loginInfo.get('uid') eq boardWriter}">
+                <c:if test="${member.uid eq dto}">
                 <button type="button" class="btn black mr5" onclick="javascript:goBoardUpdate();">수정하기</button>
                 <button type="button" class="btn black" onclick="javascript:deleteBoard();">삭제하기</button>
                 </c:if>

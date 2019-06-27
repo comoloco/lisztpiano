@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>리스트피아노-수강신청</title>
+
 <style>
 * {
 	box-sizing: border-box;
@@ -40,7 +42,60 @@
 #myTable tr.header, #myTable tr:hover {
 	background-color: #f1f1f1;
 }
+
 </style>
+<script>
+function goGrade(){
+	
+	var uid = document.getElementById('uid').value;
+	if(uid == ""){
+		alert("로그인 후 이용 가능합니다.")
+		return false;
+	}
+	$("#myForm").submit();
+	alert("변경되었습니다.");
+}
+function goGrade1(){
+	
+	var uid = document.getElementById('uid').value;
+	if(uid == ""){
+		alert("로그인 후 이용 가능합니다.")
+		return false;
+	}
+	$("#myForm1").submit();
+	alert("변경되었습니다.");
+}
+function goGrade2(){
+	
+	var uid = document.getElementById('uid').value;
+	if(uid == ""){
+		alert("로그인 후 이용 가능합니다.")
+		return false;
+	}
+	$("#myForm2").submit();
+	alert("변경되었습니다.");
+}
+function goGrade3(){
+	
+	var uid = document.getElementById('uid').value;
+	if(uid == ""){
+		alert("로그인 후 이용 가능합니다.")
+		return false;
+	}
+	$("#myForm3").submit();
+	alert("변경되었습니다.");
+}
+function goGrade4(){
+	
+	var uid = document.getElementById('uid').value;
+	if(uid == ""){
+		alert("로그인 후 이용 가능합니다.")
+		return false;
+	}
+	$("#myForm4").submit();
+	alert("변경되었습니다.");
+}
+</script>
 </head>
 <jsp:include page="../main/header.jsp" flush="true" />
 <body>
@@ -49,7 +104,6 @@
 		<div id="container" style="margin-top:50px;">
 		<input type="text" id="myInput" onkeyup="myFunction()"
 			placeholder="강의명을 검색하세요.." title="Type in a name">
-
 		<table id="myTable">
 			<tr class="top">
 				<th style="width: 15%;">모집부분</th>
@@ -67,7 +121,12 @@
 				<td>월수금</td>
 				<td>9:00 ~ 11:00</td>
 				<td>상담문의</td>
-				<td><button>수강신청</button></td>
+				<td>
+				<form id="myForm" name="myForm" method="post" action="../member/update_grade">
+				<input type="hidden" id="uid" name="uid" value="${member.uid }">
+				<input type="hidden" id="grade" name="grade" value="1">
+				
+				<a class="btn btn-primary" onclick="goGrade();">수강신청</a></form></td>
 			</tr>
 			<tr>
 				<td>취미반</td>
@@ -76,7 +135,13 @@
 				<td>월수금</td>
 				<td>12:00 ~ 2:00</td>
 				<td>상담문의</td>
-				<td><button>수강신청</button></td>
+				<td>
+				<form id="myForm1" name="myForm1" method="post" action="../member/update_grade">
+				<input type="hidden" id="uid" name="uid" value="${member.uid }">
+				<input type="hidden" id="grade" name="grade" value="2">
+				
+				<a class="btn btn-primary" onclick="goGrade1();">수강신청</a></form></td>
+				
 			</tr><tr>
 				<td>음악치료반</td>
 				<td>음악과 함께</td>
@@ -84,7 +149,13 @@
 				<td>화목</td>
 				<td>10:00 ~ 11:00</td>
 				<td>상담문의</td>
-				<td><button>수강신청</button></td>
+				<td>
+				<form id="myForm2" name="myForm2" method="post" action="../member/update_grade">
+				<input type="hidden" id="uid" name="uid" value="${member.uid }">
+				<input type="hidden" id="grade" name="grade" value="3">
+				
+				<a class="btn btn-primary" onclick="goGrade2();">수강신청</a></form></td>
+				
 			</tr><tr>
 				<td>전문반</td>
 				<td>베토벤실력</td>
@@ -92,7 +163,12 @@
 				<td>월수금</td>
 				<td>12:00 ~ 2:00</td>
 				<td>상담문의</td>
-				<td><button>수강신청</button></td>
+				<td>
+				<form id="myForm3" name="myForm3" method="post" action="../member/update_grade">
+				<input type="hidden" id="uid" name="uid" value="${member.uid }">
+				<input type="hidden" id="grade" name="grade" value="4">
+				
+				<a class="btn btn-primary" onclick="goGrade3();">수강신청</a></form></td>
 			</tr><tr>
 				<td>주니어반</td>
 				<td>될 성부른 나무</td>
@@ -100,7 +176,13 @@
 				<td>월금</td>
 				<td>5:00 ~ 7:00</td>
 				<td>상담문의</td>
-				<td><button>수강신청</button></td>
+				<td>
+				<form id="myForm4" name="myForm4" method="post" action="../member/update_grade">
+				<input type="hidden" id="uid" name="uid" value="${member.uid }">
+				<input type="hidden" id="grade" name="grade" value="5">
+				
+				<a class="btn btn-primary" onclick="goGrade4();">수강신청</a></form></td>
+				
 			</tr>
 		</table>
 		</div>
@@ -125,6 +207,7 @@
 				}
 			}
 		}
-	</script>
+		</script>
+
 </body>
 </html>

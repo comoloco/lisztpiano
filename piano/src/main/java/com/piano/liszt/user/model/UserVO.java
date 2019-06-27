@@ -9,8 +9,18 @@ public class UserVO {
 	String grade;
 	String reg_dt;
 	String start_day;
+	int ing_status;
 	
 	
+	
+
+	public int getIng_status() {
+		return ing_status;
+	}
+
+	public void setIng_status(int ing_status) {
+		this.ing_status = ing_status;
+	}
 
 	public String getStart_day() {
 		return start_day;

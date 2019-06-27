@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
-		
+<c:set value="${member }" var="member"/>		
 <style>
 table { 
 	width: 750px; 
@@ -137,7 +137,7 @@ only screen and (max-width: 760px),
 					],
 					"dataProvider": [
 						{
-							"123": 2,
+							"123": "${member.ing_status}",
 							"category": "수업진행도",
 							"평균": 5
 						}
@@ -177,27 +177,27 @@ only screen and (max-width: 760px),
 								<td colspan="5" align="center">데이터가 없습니다.</td>
 							</tr>
 						</c:when>
-						<c:when test="${!empty userList}">
-							<c:forEach var="list" items="${userList}">
-							<c:if test="${loginInfo.get('uid') eq list.uid }">
+						<c:when test="${!empty member}">
+							
+							
 								<tr>
-									<td><c:out value="${list.uid}" /></td>
-									<td><c:out value="${list.name}" /></td>
-									<td><c:out value="${list.email}" /></td>
+									<td><c:out value="${member.uid}" /></td>
+									<td><c:out value="${member.name}" /></td>
+									<td><c:out value="${member.email}" /></td>
 									<td>
-									<c:if test="${list.grade == 1}">입시반</c:if>
-									<c:if test="${list.grade == 2}">취미반</c:if>
-									<c:if test="${list.grade == 3}">음악치료반</c:if>
-									<c:if test="${list.grade == 4}">전문반</c:if>
-									<c:if test="${list.grade == 5}">주니어반</c:if>
+									<c:if test="${member.grade == 1}">입시반</c:if>
+									<c:if test="${member.grade == 2}">취미반</c:if>
+									<c:if test="${member.grade == 3}">음악치료반</c:if>
+									<c:if test="${member.grade == 4}">전문반</c:if>
+									<c:if test="${member.grade == 5}">주니어반</c:if>
 									</td>
-									<td><c:out value="${list.reg_dt}" /></td>
+									<td><c:out value="${member.reg_dt}" /></td>
 									<td>
-									${list.start_day}
+									${member.start_day}
 									</td>
 								</tr>
-								</c:if>
-							</c:forEach>
+				
+							
 						</c:when>
 					</c:choose>
 				</tbody>

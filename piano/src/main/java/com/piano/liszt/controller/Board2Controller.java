@@ -46,7 +46,7 @@ public class Board2Controller {
 	/* 게시판 - 상세 페이지 이동 */
 	@RequestMapping(value = "/boardDetail")
 	public String boardDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+		
 		return "news/boardDetail";
 	}
 

@@ -157,7 +157,7 @@
 
 					</table>
 				</form>
-				<c:if test="${loginInfo.size() > 0 }">
+				<c:if test="${member != null }">
 				<div class="btn_right mt15">
 					<button type="button" class="btn black mr5"
 						onclick="javascript:goBoardWrite();">작성하기</button>

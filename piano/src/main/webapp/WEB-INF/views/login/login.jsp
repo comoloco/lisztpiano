@@ -107,19 +107,22 @@ input:hover,.btn:hover {
 				</thead>
 				<tbody>
 					<tr>
-						<th scope="row">아이디</th>
-						<td><input type="text" id="user_id" name="ID"></td>
+						<td><input type="text" id="user_id" name="ID" placeholder="아이디"></td>
 					</tr>
 					<tr>
-						<th scope="row">비밀번호</th>
-						<td><input type="password" id="user_pwd" name="PASSWORD"></td>
+						<td><input type="password" id="user_pwd" name="PASSWORD" placeholder="비밀번호"></td>
+					</tr>
+					<tr>
+					<td>
+					<input type="button" value="로그인" id="login_btn" style="width:100%">
+				
+			</td>
 					</tr>
 				</tbody>
 			</table>
-			<div class="btn_area" style="margin-left:5%">
-				<a id="login_btn" class="btn">로그인</a>
-				<a href="signupForm" class="btn">회원가입</a>
-			</div>
+			
+			*<a href="signupForm">회원가입</a>
+			*<a href="/user/findIDPW">아이디/비밀번호 찾기</a>
 		</form>
 		</div>
 	</div>

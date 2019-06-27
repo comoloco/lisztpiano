@@ -17,8 +17,7 @@
 <style>
 .grid-menu{
 display:grid;
-grid-template-columns:10% 10% 10% 10% 10% 10% 10% 10%;
-margin-left:20%
+grid-template-columns:12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
 }
 </style>
 </head>
@@ -30,29 +29,30 @@ margin-left:20%
 			</h1>
 		</div>
 		<div style="text-align: center" class="grid-menu" >
-			<a href="/aboutUs" style="font-size:18px;margin-top: 5%;">학원소개</a>
+			<a href="/aboutUs" style="font-size:18px;">학원소개</a>
 			<c:choose>
-			<c:when test="${loginInfo.size() > 0 }">
-			<c:if test="${loginInfo.get('uid') eq 'admin' }"><a style="font-size:18px;margin-top: 5%; margin-left:30%" href="/user/getUserList">원생관리</a></c:if>
-			<c:if test="${loginInfo.get('uid') ne 'admin' }"><a style="font-size:18px;margin-top: 5%; margin-left:30%" href="/user/manageUser">원생관리</a></c:if>
+			<c:when test="${member!=null }">
+			<c:if test="${member.uid eq 'admin' }"><a style="font-size:18px; margin-left:30%" href="/user/getUserList">원생관리</a></c:if>
+			<c:if test="${member.uid ne 'admin' }"><a style="font-size:18px; margin-left:30%" href="/user/manageUser">원생관리</a></c:if>
 			</c:when>
 			<c:otherwise>
-			<a style="font-size:18px;margin-top: 5%; margin-left:30%" href="#" onclick="alert('로그인이 필요한 페이지 입니다.'); return flase;">원생관리</a>
+			<a style="font-size:18px; margin-left:30%" href="#" onclick="alert('로그인이 필요한 페이지 입니다.'); return flase;">원생관리</a>
 			</c:otherwise>
 			</c:choose>
-			<a style="font-size:18px;margin-top: 5%; margin-left:30%" href="/curriculum">커리큘럼</a>  <a style="font-size:18px;margin-top: 5%; margin-left:30%" href="/admission">수강신청</a>
-			 <a style="font-size:18px;margin-top: 5%; margin-left:30%" href="/news/boardList">새소식</a>  <a style="font-size:18px;margin-top: 5%; margin-left:30%" href="/councel">문의상담</a>
-			 <a style="font-size:18px;margin-top: 5%; margin-left:30%" href="/board/boardList">자료실</a><div style="margin-left:40%" id="plusfriend-addfriend-button"></div>
+			<a style="font-size:18px; margin-left:30%" href="/curriculum">커리큘럼</a>  <a style="font-size:18px; margin-left:30%" href="/admission">수강신청</a>
+			 <a style="font-size:18px; margin-left:30%" href="/news/boardList">새소식</a>  <a style="font-size:18px; margin-left:30%" href="/councel">문의상담</a>
+			 <a style="font-size:18px; margin-left:30%" href="/board/boardList">자료실</a><div style="margin-left:40%" id="plusfriend-addfriend-button"></div>
 		</div>
 		<div style="float:right;">
 		<c:choose>
-			<c:when test="${loginInfo.size() > 0 }">
-				${loginInfo.get("uid")}님이 로그인 중입니다.
-		<a style="font-size:14px;" href="${path }/user/logoutTry" style="text-decoration:underline;">로그아웃</a>
+			<c:when test="${member!=null }">
+				${member.uid}님이 로그인 중입니다.
+				<a href="../member/mypage">[마이페이지]</a>
+		<a style="font-size:14px;" href="../member/logout" style="text-decoration:underline;">로그아웃</a>
 			</c:when>
 			<c:otherwise>
-			<a style="font-size:14px;" href="${path }/login/login">로그인</a>
-			<a style="font-size:14px;" href="${path }/login/signupForm">회원가입</a>
+			<a style="font-size:14px;" href="../member/login_form">로그인</a>
+			<a style="font-size:14px;" href="../member/memberJoinForm">회원가입</a>
 			</c:otherwise>
 		</c:choose>
 		</div>

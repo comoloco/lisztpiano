@@ -1,22 +1,35 @@
 package com.piano.liszt.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.piano.liszt.user.controller.UserController;
+import com.piano.liszt.user.service.UserService;
 
 @Controller
 public class LisztPianoController {
-
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	
 	@Autowired
 	private JavaMailSender mailSender;
-	
+	@Inject
+	private UserService userService;
 	/* 메인화면 */
 	@RequestMapping(value = "/lisztMain")
 	public String LisztMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -44,8 +57,7 @@ public class LisztPianoController {
 	}
 	/* 수강신청 */
 	@RequestMapping(value = "/admission")
-	public String Admission(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+	public String Admission(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		return "admission/admission";
 	}
 	
