@@ -1,0 +1,16 @@
+1559572721599	Rename resource 'index.jsp'
+1559574948351	Delete element
+1559574963002	Copy file
+1559574964369	Delete element
+1559577856409	Copy file
+1559638395241	Move 'js' to 'resources'
+1559638398096	Move 'css' to 'resources'
+1559641653212	Move 4 resources to 'board'
+1559642252105	Move 'boardList.jsp' to 'views'
+1559642274860	Move 'boardDetail.jsp' to 'views'
+1559642286392	Move 'boardWrite.jsp' to 'views'
+1559642288810	Move 'boardUpdate.jsp' to 'views'
+1559642428250	Delete element
+1559642524466	Delete element
+1559642713007	Move 3 resources to 'board'
+1559644677230	Move compilation unit

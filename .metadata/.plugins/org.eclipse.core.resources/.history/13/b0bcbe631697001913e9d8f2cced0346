@@ -1,0 +1,73 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>리스트피아노</title>
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/common/common.css" />
+
+<!-- 공통 JavaScript -->
+<script type="text/javascript" src="/resources/js/common/jquery.js"></script>
+<script type="text/javascript" src="/resources/js/common.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<style>
+.grid-menu{
+display:grid;
+grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
+margin-left:25%
+}
+</style>
+</head>
+<body>
+	<div class="header">
+		<div>
+			<h1 style="text-align: center">
+				<a href="/lisztMain"style="font-size:35px;">리스트 피아노</a>
+			</h1>
+		</div>
+		<div style="text-align: center" class="grid-menu" >
+			<a href="/aboutUs" style="font-size:18px;">학원소개</a> &nbsp; &nbsp;
+			<c:choose>
+			<c:when test="${loginInfo.size() > 0 }">
+			<c:if test="${loginInfo.get('uid') eq 'admin' }"><a style="font-size:18px;" href="/user/getUserList">원생관리</a></c:if>
+			<c:if test="${loginInfo.get('uid') ne 'admin' }"><a style="font-size:18px;" href="/user/manageUser">원생관리</a></c:if>
+			</c:when>
+			<c:otherwise>
+			<a style="font-size:18px;" href="#" onclick="alert('로그인이 필요한 페이지 입니다.'); return flase;">원생관리</a>
+			</c:otherwise>
+			</c:choose>
+			 &nbsp;&nbsp;
+			<a style="font-size:18px;" href="/curriculum">커리큘럼</a> &nbsp;&nbsp; <a style="font-size:18px;" href="/admission">수강신청</a>
+			&nbsp;&nbsp; <a style="font-size:18px;" href="#" onclick="alert('준비중입니다.')">새소식</a> &nbsp;&nbsp; <a style="font-size:18px;" href="/councel">문의상담</a>
+			&nbsp;&nbsp; <a style="font-size:18px;" href="/board/boardList">자료실</a><div style="margin-left:40%" id="plusfriend-addfriend-button"></div>
+		</div>
+		<div style="float:right;">
+		<c:choose>
+			<c:when test="${loginInfo.size() > 0 }">
+				${loginInfo.get("uid")}님이 로그인 중입니다.
+		<a style="font-size:14px;" href="${path }/user/logoutTry" style="text-decoration:underline;">로그아웃</a>
+			</c:when>
+			<c:otherwise>
+			<a style="font-size:14px;" href="${path }/login/login">로그인</a>
+			<a style="font-size:14px;" href="${path }/login/signupForm">회원가입</a>
+			</c:otherwise>
+		</c:choose>
+		</div>
+	</div>
+</body>
+<script type='text/javascript'>
+  //<![CDATA[
+    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('1a64cff5903756cd504b9c57d51b2e1b');
+    // 플러스친구 친구추가 버튼을 생성합니다.
+    Kakao.PlusFriend.createAddFriendButton({
+      container: '#plusfriend-addfriend-button',
+      plusFriendId: '_WuxbTT' // 플러스친구 홈 URL에 명시된 id로 설정합니다.
+    });
+  //]]>
+</script>
+</html>
